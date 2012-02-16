@@ -1,0 +1,48 @@
+body {
+	font-family: 'Hammersmith One', sans-serif;
+	background: #1A1A1A;
+	color: #CECECE;
+	margin: 0; padding: 0;
+	height: 100%;
+}
+.container {
+	margin: 0 auto;
+	width: 600px;
+	min-height: 40px;
+	text-align:center;
+	height: auto;
+}
+h1{float:left; width: 250px;}
+h1 a, h1 a:visited{color: #cecece; text-decoration: none;}
+#fetch{
+	float: left;
+	padding-top: 20px;}
+.clearfix:after{
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	height: 0;
+	line-height: 0;
+	}
+.clearfix{display:inline-block;}
+h2.loading{color: #C1C1C1;}
+input, button{
+	padding: 5px;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius:8px;}
+img {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius:8px;}
+footer {
+	color: #CECECE;
+	background: #010101;
+	width: 100%;
+	height: 100%;
+}
+footer p {padding: 10px;}
+footer a{color: #f1f1f1;}
