@@ -23,18 +23,19 @@ $(document).ready(function() {
 
 			$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.search&artist="+film+"&api_key="+apikey+"&format=json", function(data) {
 				if(data!=''){
-					$('#poster').html('<h2 class="loading">Found yer image</h2><p>' +data.results.artistmatches.artist[0].name+ '</p><p><img src="'+data.results.artistmatches.artist[0].image[2]['#text']+'" /></p><p>');
+					$('#poster').html('<p>' +data.results.artistmatches.artist[0].name+ '</p><p><img src="'+data.results.artistmatches.artist[0].image[2]['#text']+'" /></p><p>');
 
 				console.log(data.results.artistmatches.artist[0]);
 
 				film=data.results.artistmatches.artist[0].name;
 
 				$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+film+"&limit=10&api_key="+apikey+"&format=json", function(data) {
-					    $('#poster').append('<h2 class="loading">Top Albums</h2><ul style="text-align: left">');
+					    $('#poster').append('<h2 class="loading">Top Albums</h2>');
 						$.each(data.topalbums.album, function(i, item) {
-						$('#poster').append('<li>'+item.name+ '</li>');
+						$('#poster').append('<figure><img class="album_" src="'+item.image[2]['#text']+ '" /><figcaption>'+item.name+'</figcaption></figure>');
+						if(i==3){$('#poster').append('<div class="clearfix"> </div>')}
 					});
-					$('#poster').append('</ul>');
+					$('#poster').append('');
 				});
 				} else {
 					$('#poster').append('<h2 class="loading">Sorry.. couldn\'t find it..</h2>');
