@@ -29,19 +29,21 @@ $(document).ready(function() {
 
 				film=data.results.artistmatches.artist[0].name;
 				
-				$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+film+"&limit=10&api_key="+apikey+"&format=json", function(data) {
+				$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+film+"&limit=3&api_key="+apikey+"&format=json", function(data) {
 					    $('#poster').append('<h2 class="loading">Top Albums</h2>');
-						$.each(data.topalbums.album, function(i, item) {
 
-						$('#poster').append('<figure><img class="album_" src="'+item.image[2]['#text']+ '" /><figcaption>'+item.name+'</figcaption></figure>');
+						$.each(data.topalbums.album, function(i, item) {
+						album_id=item.name;
+						$('#poster').append('<div class="album_'+i+'"><figure><img class="album_" src="'+item.image[2]['#text']+ '" /><figcaption>'+album_id+'</figcaption></figure></div>');
 						if(i==3){$('#poster').append('<div class="clearfix"> </div>')}
 							$.getJSON("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+apikey+"&artist="+film+"&album="+item.name+"&format=json", function(data) {
-									album_id = data.album.id;
-
-								$.getJSON("http://lastfm-api-ext.appspot.com/2.0/?method=playlist.fetch&playlistURL=lastfm://playlist/album/"+album_id+"&api_key="+apikey, function(json) {
-									console.log(json);		
+								$.each(data.album.tracks, function(y, albitem) {
+									$.each(albitem, function(x,tracks) {
+										$('.album_'+i).append('<p>'+(x+1)+') ' +tracks.name+'</p>');
+									});
+									
 								});
-
+									
 							});
 					});
 
