@@ -39,7 +39,11 @@ $(document).ready(function() {
 							$.getJSON("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+apikey+"&artist="+film+"&album="+item.name+"&format=json", function(data) {
 								$.each(data.album.tracks, function(y, albitem) {
 									$.each(albitem, function(x,tracks) {
-										$('.album_'+i).append('<p>'+(x+1)+') ' +tracks.name+'</p>');
+										$.getJSON("http://ws.audioscrobbler.com/2.0/?method=track.getinfo&api_key="+apikey+"&artist="+film+"&track="+tracks.name+"&format=json", function(data) {
+												console.log(data);
+												$('.album_'+i).append('<p>'+(x+1)+") <a href='#' onClick=\"window.open('http://play.last.fm/preview/" +data.track.id+ ".mp3','','width=300,height=200,location=0,menubar=0,scrollbars=0,status=0,toolbar=0,resizable=0')\">" +tracks.name+'</a></p>');
+											});
+										console.log(tracks.id);
 									});
 									
 								});
