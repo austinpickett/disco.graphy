@@ -6,9 +6,9 @@ $(document).ready(function() {
 			$('#poster').empty();
 		}
 	});
-
 	var getPoster = function(){
 		//grab movie title and store it.
+		var album_id;
 		var film=$('#term').val();
 		film.replace(" ","+");
 		var apikey='4958eb7f6ab4905b7532ab77fa9edc62';
@@ -28,13 +28,23 @@ $(document).ready(function() {
 				console.log(data.results.artistmatches.artist[0]);
 
 				film=data.results.artistmatches.artist[0].name;
-
+				
 				$.getJSON("http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist="+film+"&limit=10&api_key="+apikey+"&format=json", function(data) {
 					    $('#poster').append('<h2 class="loading">Top Albums</h2>');
 						$.each(data.topalbums.album, function(i, item) {
+
 						$('#poster').append('<figure><img class="album_" src="'+item.image[2]['#text']+ '" /><figcaption>'+item.name+'</figcaption></figure>');
 						if(i==3){$('#poster').append('<div class="clearfix"> </div>')}
+							$.getJSON("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key="+apikey+"&artist="+film+"&album="+item.name+"&format=json", function(data) {
+									album_id = data.album.id;
+
+								$.getJSON("http://lastfm-api-ext.appspot.com/2.0/?method=playlist.fetch&playlistURL=lastfm://playlist/album/"+album_id+"&api_key="+apikey, function(json) {
+									console.log(json);		
+								});
+
+							});
 					});
+
 					$('#poster').append('');
 				});
 				} else {
