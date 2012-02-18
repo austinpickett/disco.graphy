@@ -7,16 +7,20 @@ body {
 }
 .container {
 	margin: 0 auto;
-	width: 800px;
+	width: 900px;
 	text-align:center;
 	padding-bottom: 30px;
 }
-figure {float: left; max-width: 80px}
+
+
+figure {display: block; max-width: 80px}
 figcaption{font-size: 10px; width: 80px; padding-left: 20px; padding-bottom: 20px;}
 h1{display: inline-block; width: 550px; padding-left: 20px;}
 h1 a, h1 a:visited{color: #cecece; text-decoration: none;}
 h1 span{color:#FFF;}
 #poster{text-align: center;margin-bottom: 30px;}
+#poster div {width: 300px; float: left;}
+#poster div p {text-align: left !important;}
 #fetch{
 	display: inline-block;
 	padding-top: 20px;}
@@ -51,6 +55,7 @@ footer {
 	margin-left: -8px;
 	border-top: 2px solid #a0a0a0;
 	margin-top: 20px;
+	padding-left: 20px;
 }
 footer a{color: #f1f1f1;}
 footer a:hover{text-decoration: none;}
